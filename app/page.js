@@ -21,7 +21,11 @@ export default function Home() {
 
     const handleScroll = (event) => {
       if (canIncrement.current) {
-        setStep(prevStep => prevStep + 1);
+        if (event.deltaY > 0) {
+          setStep(prevStep => prevStep + 1);
+        } else if (event.deltaY < 0) {
+          setStep(prevStep => Math.max(prevStep - 1, 0));
+        }
         canIncrement.current = false;
         resetIncrement();
       }
@@ -41,7 +45,7 @@ export default function Home() {
 
   return (
     <>
-      <p>{step}</p>
+      <p className="text-6xl font-bold ml-5 mt-5">{step}</p>
       <div ref={landingRef}>
 
       </div>
