@@ -57,8 +57,8 @@ export default function Home() {
   return (
     <>
       <div className="relative">
-        <div className="absolute bottom-5">
-          <Tracker steps={pageRefs} />
+        <div className="fixed left-1/2 bottom-16 transform -translate-x-1/2">
+          <Tracker steps={pageRefs} currentStep={step} />
         </div>
         <p className="text-6xl font-bold fixed">{step}</p>
         <div className="flex">
