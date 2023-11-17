@@ -1,62 +1,85 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react";
-import debounce from "lodash.debounce"
-
 export default function Home() {
 
   const [step, setStep] = useState(0);
 
-  const canIncrement = useRef(true);
+  const scrollHandled = useRef(false);
+  const scrollTimeout = useRef(null);
 
   const landingRef = useRef(null);
   const aboutRef = useRef(null);
   const portfolioRef = useRef(null);
   const contactRef = useRef(null);
 
-  useEffect(() => {
-    const resetIncrement = debounce(() => {
-      canIncrement.current = true;
-    }, 2000);
+  const pageRefs = [landingRef, aboutRef, portfolioRef, contactRef]
 
+  useEffect(() => {
     const handleScroll = (event) => {
-      if (canIncrement.current) {
+      event.preventDefault(); // Prevent actual scrolling
+      if (!scrollHandled.current) {
         if (event.deltaY > 0) {
-          setStep(prevStep => prevStep + 1);
+          setStep(prevStep => Math.min(prevStep + 1, pageRefs.length - 1));
         } else if (event.deltaY < 0) {
           setStep(prevStep => Math.max(prevStep - 1, 0));
         }
-        canIncrement.current = false;
-        resetIncrement();
+        scrollHandled.current = true;
+
+        // Clear existing timeout
+        if (scrollTimeout.current) {
+          clearTimeout(scrollTimeout.current);
+        }
+
+        // Reset scrollHandled after a delay
+        scrollTimeout.current = setTimeout(() => {
+          scrollHandled.current = false;
+        }, 1000); // 500ms delay to reset
       }
     };
 
-    window.addEventListener('wheel', handleScroll);
+    window.addEventListener('wheel', handleScroll, { passive: false });
 
     return () => {
       window.removeEventListener('wheel', handleScroll);
-      resetIncrement.cancel();
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
     };
   }, []);
 
   useEffect(() => {
-    //scrollTo new step when it changes.
-  }, [step])
+    // Get top position relative to the document
+    const left = pageRefs[step].current.offsetLeft;
+    window.scrollTo({ left, behavior: 'smooth' });
+  }, [step]);
 
   return (
     <>
-      <p className="text-6xl font-bold ml-5 mt-5">{step}</p>
-      <div ref={landingRef}>
+      <div className="relative">
+        <p className="text-6xl font-bold fixed">{step}</p>
+        <div className="flex">
+          <div ref={landingRef}>
+            <div className="h-screen w-screen bg-blue-100">
 
-      </div>
-      <div ref={aboutRef}>
+            </div>
+          </div>
+          <div ref={aboutRef}>
+            <div className="h-screen w-screen bg-purple-100">
 
-      </div>
-      <div ref={portfolioRef}>
+            </div>
+          </div>
+          <div ref={portfolioRef}>
+            <div className="h-screen w-screen bg-orange-100">
 
-      </div>
-      <div ref={contactRef}>
+            </div>
+          </div>
+          <div ref={contactRef}>
+            <div className="h-screen w-screen bg-red-100">
 
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )
