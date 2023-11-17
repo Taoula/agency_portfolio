@@ -58,13 +58,13 @@ export default function Home() {
   return (
     <>
       <div className="relative">
-        <div className="fixed left-1/2 bottom-16 transform -translate-x-1/2">
+        <div className="fixed left-1/2 bottom-10 transform -translate-x-1/2">
           <Tracker steps={pageRefs} currentStep={step} setStep={setStep} />
         </div>
         <p className="text-6xl font-bold fixed">{step}</p>
         <div className="flex">
           <div ref={landingRef}>
-            <div className="h-screen w-screen bg-blue-100 flex flex-col justify-center items-center">
+            <div className="h-screen w-screen bg-white flex flex-col justify-center items-center">
               <FramerShell direction="down">
                 <p className="text-5xl font-bold text-green-950">Down</p>
               </FramerShell>

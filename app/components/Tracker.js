@@ -19,7 +19,7 @@
 export default function Tracker({ steps, currentStep, setStep }) {
   return (
     <>
-      <div className="w-fit px-8 flex gap-12 bg-blue-600/20 py-4 rounded-full">
+      <div className="w-fit px-12 flex gap-20 bg-blue-600/10 py-6 rounded-full scale-90">
         {steps.map((step, index) => (
           <div
             key={index}
