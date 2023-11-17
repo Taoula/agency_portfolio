@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import FramerShell from "./FramerShell";
 import Tracker from "./components/Tracker";
 export default function Home() {
   const [step, setStep] = useState(0);
@@ -63,16 +64,32 @@ export default function Home() {
         <p className="text-6xl font-bold fixed">{step}</p>
         <div className="flex">
           <div ref={landingRef}>
-            <div className="h-screen w-screen bg-white"></div>
+            <div className="h-screen w-screen bg-blue-100 flex flex-col justify-center items-center">
+              <FramerShell direction="down">
+                <p className="text-5xl font-bold text-green-950">Down</p>
+              </FramerShell>
+            </div>
           </div>
           <div ref={aboutRef}>
-            <div className="h-screen w-screen bg-red-600/20"></div>
+            <div className="h-screen w-screen bg-purple-100 flex flex-col justify-center items-center">
+              <FramerShell direction="up">
+                <p className="text-5xl font-bold text-green-950">Up</p>
+              </FramerShell>
+            </div>
           </div>
           <div ref={portfolioRef}>
-            <div className="h-screen w-screen bg-yello-600/20"></div>
+            <div className="h-screen w-screen bg-orange-100 flex flex-col justify-center items-center">
+              <FramerShell direction="left">
+                <p className="text-5xl font-bold text-green-950">Left</p>
+              </FramerShell>
+            </div>
           </div>
           <div ref={contactRef}>
-            <div className="h-screen w-screen bg-red-100"></div>
+            <div className="h-screen w-screen bg-red-100 flex flex-col justify-center items-center">
+              <FramerShell direction="right">
+                <p className="text-5xl font-bold text-green-950">Right</p>
+              </FramerShell>
+            </div>
           </div>
         </div>
       </div>
