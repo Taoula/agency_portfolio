@@ -3,13 +3,33 @@
 @tailwind utilities;
 
 body::-webkit-scrollbar {
-    display: none;
-    /* for Chrome, Safari, and Opera */
+  display: none;
+  /* for Chrome, Safari, and Opera */
 }
 
 body {
-    -ms-overflow-style: none;
-    /* for Internet Explorer and Edge */
-    scrollbar-width: none;
-    /* for Firefox */
+  -ms-overflow-style: none;
+  /* for Internet Explorer and Edge */
+  scrollbar-width: none;
+  /* for Firefox */
+}
+
+.hollow-text-beige {
+  color: transparent;
+  -webkit-text-stroke: 2px #ffe3c4; /* width and color of the stroke */
+  text-stroke: 1px #000; /* Standard syntax */
+}
+
+.hollow-text-beige {
+  transition: opacity 2s ease-in-out;
+}
+
+.span-text-beige {
+  transition: color 2s ease-in-out, -webkit-text-stroke 2s ease-in-out,
+    opacity 2s ease-in-out;
+}
+
+.span-text-beige {
+  color: #d33f49;
+  -webkit-text-stroke: 0px #d33f49;
 }

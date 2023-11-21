@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import FramerShell from "./FramerShell";
 import Tracker from "./components/Tracker";
 import Image from "next/image";
-import wave from "public/wave.svg";
+
 
 export default function Home() {
   const [step, setStep] = useState(0);
@@ -18,7 +18,7 @@ export default function Home() {
   const contactRef = useRef(null);
 
   const pageRefs = [landingRef, aboutRef, portfolioRef, contactRef];
-
+  const [landingAnimDone, setLandingAnimDone] = useState(false)
   useEffect(() => {
     const handleScroll = (event) => {
       event.preventDefault(); // Prevent actual scrolling
@@ -60,30 +60,29 @@ export default function Home() {
 
   return (
     <>
-      <div className="relative text-white">
-        <Image
-          src={wave}
-          layout="fill"
-          objectFit="contain"
-          objectPosition="bottom"
-          className="z-0"
-        />
+      <div className="relative ">
         <div className="fixed left-1/2 bottom-10 transform -translate-x-1/2">
           <Tracker steps={pageRefs} currentStep={step} setStep={setStep} />
         </div>
         <p className="text-6xl font-bold fixed">{step}</p>
         <div className="flex">
           <div ref={landingRef}>
-            <div className="h-screen w-screen bg-blue-600 flex flex-col justify-center items-center">
-              <FramerShell direction="down">
-                <p className="text-5xl font-bold text-white">Down</p>
+            <div className="h-screen w-screen bg-[#FFF0DE] flex flex-col justify-center">
+              <FramerShell direction="right" size={1000} duration={3}>
+                <p className="hollow-text-beige text-huge tracking-wide font-bold font-abril whitespace-nowrap">Hey <span className={landingAnimDone ? "span-text-beige" : ""}>Hey!</span> Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey Hey</p>
+              </FramerShell>
+              <FramerShell direction="left" size={800} duration={3}>
+                <p className="hollow-text-beige text-huge tracking-wide font-bold font-abril whitespace-nowrap">e're We're <span className={landingAnimDone ? "span-text-beige" : ""}>We're</span> We're We're We're We're We're We're We're We're We're We're We're We're</p>
+              </FramerShell>
+              <FramerShell direction="right" size={1600} duration={3} setDone={setLandingAnimDone}>
+                <p className="hollow-text-beige text-huge tracking-wide font-bold font-abril whitespace-nowrap">yan Paul & Ryan  <span className={landingAnimDone ? "span-text-beige" : ""}>Paul & Ryan</span> Paul & Ryan Paul & Ryan Paul & Ryan Paul & Ryan</p>
               </FramerShell>
             </div>
           </div>
           <div ref={aboutRef}>
             <div className="h-screen w-screen bg-purple-100 flex flex-col justify-center items-center">
               <FramerShell direction="up">
-                <p className="text-5xl font-bold text-white">Up</p>
+                <p className="text-6xl font-bold text-white">Up</p>
               </FramerShell>
             </div>
           </div>
